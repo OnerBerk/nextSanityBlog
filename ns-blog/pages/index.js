@@ -3,9 +3,10 @@ import Layout from "component/uiComponent/Layout";
 import AuthorIntro from "../component/uiComponent/authorIntro";
 import CardListItem from "../component/uiComponent/cardListItem";
 import CardItem from "../component/uiComponent/cardItem";
+import {getAllBlogs} from "../lib/api";
 
 
-export default function Home() {
+export default function Home({blogs}) {
     return (
         <Layout>
             <AuthorIntro/>
@@ -17,11 +18,28 @@ export default function Home() {
                         <CardListItem/>
                     </Col>
 
-                    <Col md="4">
-                        <CardItem/>
-                    </Col>
+                    {
+                        blogs.map((blog, i )=>
+                            <Col key={i} md="4">
+                                <CardItem
+                                    title={blog.title}
+                                    subtitle={blog.subTitle}
+                                />
+                            </Col>
+                        )
+                    }
                 </Row>
             </div>
         </Layout>
     )
+}
+
+//cette fonction seras appeler lors du build de l'app
+export async function getStaticProps() {
+    const blogs = await getAllBlogs();
+    return {
+        props: {
+            blogs
+        }
+    }
 }
