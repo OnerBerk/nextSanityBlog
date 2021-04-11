@@ -22,8 +22,15 @@ export default function Home({blogs}) {
                         blogs.map((blog, i )=>
                             <Col key={i} md="4">
                                 <CardItem
+                                    author={blog.author}
                                     title={blog.title}
                                     subtitle={blog.subTitle}
+                                    date={blog.date}
+                                    image={blog.coverImage}
+                                    link={{
+                                        href:'/blogs/[slug]',
+                                        as:`/blogs/${blog.slug}`
+                                    }}
                                 />
                             </Col>
                         )
@@ -38,8 +45,6 @@ export default function Home({blogs}) {
 export async function getStaticProps() {
     const blogs = await getAllBlogs();
     return {
-        props: {
-            blogs
-        }
+        props: {blogs}
     }
 }

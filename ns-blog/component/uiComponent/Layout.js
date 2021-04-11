@@ -1,22 +1,28 @@
 import {Container} from "react-bootstrap";
+import Head from "next/head";
 import NavbarComponent from "./Navbar";
 
 const Layout = ({children, className}) => {
     return (
-        <Container>
-            <NavbarComponent/>
-            <div className={`page-wrapper ${className}`}>
-                {children}
-            </div>
-            <footer className="page-footer">
-                <div>
-                    <a href="#">courses</a>{' | '}
-                    <a href="#">github</a>{' | '}
-                    <a href="#">facebook</a>
+        <>
+            <Head>
+                    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet"/>
+            </Head>
+            <Container>
+                <NavbarComponent/>
+                <div className={`page-wrapper ${className}`}>
+                    {children}
                 </div>
-            </footer>
-        </Container>
-    )
+                <footer className="page-footer">
+                    <div>
+                        <a href="#">courses</a>{' | '}
+                        <a href="#">github</a>{' | '}
+                        <a href="#">facebook</a>
+                    </div>
+                </footer>
+            </Container>
+        </>
+)
 }
 
 export default Layout
